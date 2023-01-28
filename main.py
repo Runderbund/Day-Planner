@@ -1,0 +1,1 @@
+destinations = ["New York", "Las Vegas", "Phoenix", "Gracetown", "Salt Lake City", "Lincoln", "Orlando" ]
