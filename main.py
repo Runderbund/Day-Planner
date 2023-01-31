@@ -4,19 +4,18 @@ def main():
     generated_option_list, trip_option_list = generate_trip()
     get_user_input(generated_option_list, trip_option_list)
 
+# Generates a 2D list of trip options
+# Sends that list to generate_all_options to select one of each category
 def generate_trip():
     destination_options = ["New York", "Las Vegas", "Phoenix", "Gracetown", "Salt Lake City", "Lincoln", "Orlando"]
     restaurant_options = ["McDonalds", "Pizza Hut", "Cheesecake Factory", "Olive Garden", "Burger King", "Sonic", "IHOP"]
     transportation_options = ["Train", "Uber", "Airplane", "Helicopter", "Segway", "Walk", "Horse"]
     entertainment_options = ["See a play", "Watch a movie", "Go bowling", "Take a walk", "Ride Horses", "Read a book", "Watch paint dry"]
     trip_option_list = [destination_options, restaurant_options, transportation_options, entertainment_options]
-    #destination, restaurant, transportation, entertainment = generate_all_options(trip_option_list)
-    # Scratch that. Leave as list.
     generated_option_list = generate_all_options(trip_option_list)
     return generated_option_list, trip_option_list
 
 #Returns the four options as a list of Strings chosen from generated option lists
-#This is superflous with generate_trip.
 def generate_all_options(trip_option_list):
     destination = trip_option_list[0][random.randint(0, 6)]
     restaurant = trip_option_list[1][random.randint(0, 6)]
@@ -34,6 +33,7 @@ def print_current_options(generated_option_list):
     print(f"3 - Transportation: {transportation}")
     print(f"4 - Entertainment: {entertainment} \n")
 
+# Presents the user with choices until they're satisfied.
 def get_user_input(generated_option_list, trip_option_list):
     user_input = ''
     print_current_options(generated_option_list)
@@ -43,12 +43,12 @@ def get_user_input(generated_option_list, trip_option_list):
         user_input = input ("If you are satisfied with these options, type \"Y\" and hit Enter. ")
         generated_option_list = change_trip_option(generated_option_list, user_input, trip_option_list)
         print_current_options(generated_option_list)
-        # Should check for invalid inputs to be more robust
+        # Could check for invalid inputs to be more robust
     print ("We're glad you're satisfied.")
 
-        
+# Changes a specific trip option requested by the user        
 def change_trip_option(generated_option_list, item_to_change, trip_option_list):
-    #Should actually make sure it doesn't return same by random chance.
+    #Could actually make sure it doesn't return same by random chance.
     match item_to_change:
         case "1":
             destination = trip_option_list[0][random.randint(0, 6)]
@@ -67,8 +67,9 @@ def change_trip_option(generated_option_list, item_to_change, trip_option_list):
             generated_option_list[3] = entertainment
             return generated_option_list
         case "5":
-            generated_option_list = generate_trip()[0] # to not get trip_option_list
+            generated_option_list = generate_trip()[0]
             return generated_option_list 
-        case "Y": # or "y"
+        case "Y" | "y": #Why is this not working for y?
             return generated_option_list
+
 main()
